@@ -15,7 +15,7 @@ public class ResourceOptionDisplay : MonoBehaviour
     [SerializeField] public GameObject textResourceAmount;
 
     [SerializeField] public Resource resourceShown;
-    [SerializeField] public float resourceAmountMegatonnes = 200f;
+    [SerializeField] public float resourceAmountMegatonnes = 0;
     
 
     public ResourceOptionDisplay()
@@ -30,20 +30,10 @@ public class ResourceOptionDisplay : MonoBehaviour
     public void click()
     {
         // constructorMenu.select(this);
-        // GetComponent<Image>().color = onHighlightColor;//new Color(onHighlightColor.r, onHighlightColor.g, onHighlightColor.b, onHighlightColor.a);
-
     }
 
     public void setBackgroundSelected(bool selected)
     {
-        // if (selected)
-        // {
-        //     GetComponent<Image>().color = onHighlightColor;//new Color(onHighlightColor.r, onHighlightColor.g, onHighlightColor.b, onHighlightColor.a);
-        // }
-        // else
-        // {
-        //     GetComponent<Image>().color = defaultColor;//new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
-        // }
     }
     
     void Start()

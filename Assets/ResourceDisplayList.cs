@@ -20,18 +20,18 @@ public class ResourceDisplayList : MonoBehaviour
         float widthOfScrollOffset = (itemHolder.GetComponent<RectTransform>().rect.width / 2) - (resourceBoxPrefab.GetComponent<RectTransform>().rect.width / 2);
         foreach (var resource in displayResources.getResouces())
         {
-            Debug.Log("widthOfScroll - "+widthOfScrollOffset);
             GameObject resourceBox = Instantiate(resourceBoxPrefab, this.gameObject.transform.position + new Vector3((index++)*100- widthOfScrollOffset, 0, 0), Quaternion.identity, itemHolder.transform) as GameObject;
             resourceBox.GetComponent<ResourceOptionDisplay>().resourceShown = resource.Key;
             resourceBox.GetComponent<ResourceOptionDisplay>().resourceAmountMegatonnes = resource.Value;
 
-            
             // GameObject newPlayer = Instantiate(Resources.Load("Player", typeof(GameObject))) as GameObject;
             
             // resourceBox.getComponent*().GetComponent<TextMeshProUGUI>().text = resourceShown.name;
             // textResourceSymbol.GetComponent<TextMeshProUGUI>().text = resourceShown.symbol;
             // textResourceAmount.GetComponent<TextMeshProUGUI>().text = Units.format(resourceAmountMegatonnes, Units.Unit.MEGATONNE);
         }
+
+        this.gameObject.transform.parent.parent.GetComponent<Window>().updateHeight();
     }
 
     // Update is called once per frame
