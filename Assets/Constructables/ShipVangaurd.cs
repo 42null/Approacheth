@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShipVangaurd : MonoBehaviour
 {
-    public ResourceHolder heldResources;
+    [SerializeField] public ResourceHolder heldResources;
 
     public ShipVangaurd()
     {

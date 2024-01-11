@@ -10,8 +10,8 @@ namespace SolarBodies
         {
             // float distance = (orbiter.transform.position - orbiting.transform.position).magnitude;
 
-            angle *= 1/distance;
-            
+            angle *= 1 / distance;
+
             Vector3 relativeSpawnPositionToObject = new Vector3(
                 Mathf.Cos(angle) * distance,
                 Mathf.Sin(angle) * distance,
@@ -19,6 +19,11 @@ namespace SolarBodies
             );
 
             return orbiting.transform.position + relativeSpawnPositionToObject;
+        }
+
+        public static float CalculateDistanceBetween(GameObject first, GameObject second)
+        {
+            return (first.transform.position - second.transform.position).magnitude;
         }
     }
 }

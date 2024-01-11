@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class OrbiterData
 {
     public GameObject Orbiter;
-    public float Distance;
+    public float Distance = 0;
     
     // public GameObject Orbiter => orbiter;
     // public float Distance => distance;
@@ -56,7 +56,7 @@ public class OrbitalBody : MonoBehaviour
     public void addOrbiter(GameObject newOrbiter)
     {
         this.transform = GetComponent<Transform>();
-        float orbiterDistance = (newOrbiter.transform.position - this.transform.position).magnitude;
+        float orbiterDistance = OrbitalMechanics.CalculateDistanceBetween(this.gameObject, newOrbiter);
         
         orbiters.Add(new OrbiterData(newOrbiter, orbiterDistance));
     }
@@ -67,9 +67,16 @@ public class OrbitalBody : MonoBehaviour
         // this.transform.localScale = new Vector3(scale/10, scale/10, 1);
     }
     void Start()
-     {
-
-     }
+    {
+        //TODO: Move to OnValidate to make show up in inspector?
+        for(int i = 0; i < orbiters.Count; i++)
+        {
+            if (orbiters[i].Distance == 0)
+            {
+                orbiters[i].Distance = OrbitalMechanics.CalculateDistanceBetween(this.gameObject, orbiters[i].Orbiter);
+            }
+        }
+    }
     
     // Update is called once per frame
     void Update()
