@@ -24,7 +24,6 @@ public class ResourceDisplayList : MonoBehaviour
             resourceBox.GetComponent<ResourceOptionDisplay>().resourceShown = resource.Key;
             resourceBox.GetComponent<ResourceOptionDisplay>().resourceAmountMegatonnes = resource.Value;
 
-            // GameObject newPlayer = Instantiate(Resources.Load("Player", typeof(GameObject))) as GameObject;
             
             // resourceBox.getComponent*().GetComponent<TextMeshProUGUI>().text = resourceShown.name;
             // textResourceSymbol.GetComponent<TextMeshProUGUI>().text = resourceShown.symbol;

@@ -10,7 +10,7 @@ public class Window : MonoBehaviour
     [SerializeField] public GameObject closeIcon;
     [SerializeField] public GameObject shrinkIcon;
     [SerializeField] public GameObject contentListHolder;
-    [SerializeField] public List<GameObject> contentItems;
+    [SerializeField] public List<GameObject> contentItems = new List<GameObject>(){};
 
     private bool isShrunk = false; 
     
@@ -26,7 +26,6 @@ public class Window : MonoBehaviour
     public void updateHeight()
     {
         float height = UIHelpers.calculateSqueezedHeight(contentItems.First().gameObject.GetComponent<InnerContentContent>().getInnerContentChildren(), 5, 5);
-        Debug.Log("H2="+height);
         this.contentListHolder.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
     }
     

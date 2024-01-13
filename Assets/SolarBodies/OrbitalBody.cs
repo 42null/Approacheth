@@ -52,6 +52,13 @@ public class OrbitalBody : MonoBehaviour
         this.resourceHolder = NaturalResourceGen.generateResources(NaturalResourceGen.BodyType.STAR, scale);
     }
 
+    // public SortedList<Resource,float> getResourses()
+    public ResourceHolder getResourses()
+    {
+        return this.resourceHolder;
+        // return resourceHolder.getResouces();
+    }
+
 
     public void addOrbiter(GameObject newOrbiter)
     {
