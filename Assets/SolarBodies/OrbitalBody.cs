@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using SolarBodies;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEditor;
 
 [System.Serializable]
 public class OrbiterData
@@ -27,6 +29,9 @@ public class OrbiterData
 
 public class OrbitalBody : MonoBehaviour
 {
+    [SerializeField]
+    public NaturalResourceGen.BodyType bodyType = NaturalResourceGen.BodyType.UNSET_DEFAULT;
+    
     // [SerializeField] public List<KeyValuePair<GameObject, float>> orbiters = new List<KeyValuePair<GameObject, float>>();
     [SerializeField] public List<OrbiterData> orbiters = new List<OrbiterData>();
 
@@ -47,9 +52,9 @@ public class OrbitalBody : MonoBehaviour
         return this.orbitingAtAngle += angle;
     }
 
+    // public OrbitalBody()
     public OrbitalBody()
     {
-        this.resourceHolder = NaturalResourceGen.generateResources(NaturalResourceGen.BodyType.STAR, scale);
     }
 
     // public SortedList<Resource,float> getResourses()
@@ -75,6 +80,8 @@ public class OrbitalBody : MonoBehaviour
     }
     void Start()
     {
+        this.resourceHolder = NaturalResourceGen.generateResources(this.bodyType, scale);
+
         //TODO: Move to OnValidate to make show up in inspector?
         for(int i = 0; i < orbiters.Count; i++)
         {

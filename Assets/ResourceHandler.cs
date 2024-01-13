@@ -1,5 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+public class ConstructedMenu
+{
+    public GameObject initatedPrefab;
+    public GameObject calledInitalization;
+    public Window window;
+
+    public ConstructedMenu(GameObject calledInitalization, GameObject initatedPrefab, Window window)
+    {
+        this.initatedPrefab = initatedPrefab;
+        this.calledInitalization = calledInitalization;
+        this.window = window;
+    }
+
+}
 
 public class ResourceHandler : MonoBehaviour, IPointerClickHandler
 {
@@ -8,9 +24,16 @@ public class ResourceHandler : MonoBehaviour, IPointerClickHandler
     [SerializeField] public Canvas canvasToPlaceOn;
     [SerializeField] public Camera camera;
 
-    public void createResourceWindow(GameObject gameObjectRequesting)
+    private Dictionary<GameObject, ConstructedMenu> constructedMenus = new Dictionary<GameObject, ConstructedMenu>(){};
+    
+    public void openOrResourceWindow(GameObject gameObjectRequesting)
     {
-        if (gameObjectRequesting.TryGetComponent<OrbitalBody>(out OrbitalBody orbitalBody))
+        if(constructedMenus.ContainsKey(gameObjectRequesting))
+        {
+            ConstructedMenu targetedMenu = constructedMenus[gameObjectRequesting];
+            targetedMenu.initatedPrefab.SetActive(!targetedMenu.initatedPrefab.activeSelf);
+        }
+        else if(gameObjectRequesting.TryGetComponent<OrbitalBody>(out OrbitalBody orbitalBody))
         {
             ResourceHolder resourceHolder = orbitalBody.getResourses();
 
@@ -28,11 +51,15 @@ public class ResourceHandler : MonoBehaviour, IPointerClickHandler
             GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition, Quaternion.identity, instantiatedWindowPrefab.transform);
             
             resourcesContent.transform.SetParent(instantiatedWindowPrefab.transform, false);
+            
+            resourcesContent.GetComponent<ResourceDisplayList>().DisplayResources = resourceHolder;
+            
+            Window window = instantiatedWindowPrefab.GetComponent<Window>();
+            window.contentItems.Add(resourcesContent);
+            window.updateHeight();
 
-            instantiatedWindowPrefab.GetComponent<Window>().contentItems.Add(resourcesContent);
-            instantiatedWindowPrefab.GetComponent<Window>().updateHeight();
+            constructedMenus.Add(gameObjectRequesting, new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
 
-            // instantiatedWindowPrefab.GetComponent<Window>().contentListHolder = ;
         }
     }
 
@@ -58,6 +85,6 @@ public class ResourceHandler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        createResourceWindow(gameObject);
+        openOrResourceWindow(eventData.pointerPress);
     }
 }

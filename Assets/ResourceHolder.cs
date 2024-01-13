@@ -271,7 +271,7 @@ public class ResourceHolder
     public static readonly Resource Oganesson = new Resource(Element.OGANESSON, 118, "Og", "Oganesson", 325f);
     
     
-    private SortedList<Resource, float> storedResources;
+    public SortedList<Resource, float> storedResources;
     
     public ResourceHolder(SortedList<Resource, float> storedResources)
     {
