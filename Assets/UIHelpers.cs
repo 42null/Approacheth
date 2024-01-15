@@ -16,7 +16,6 @@ namespace DefaultNamespace
             {
                 Vector3[] localCornersFirst = new Vector3[4];
                 contentItems[0].GetComponent<RectTransform>().GetLocalCorners(localCornersFirst);
-                // contentItems[0].GetComponent<RectTransform>().GetWorldCorners(localCornersFirst);
                 minY = localCornersFirst[0].y;
                 maxY = localCornersFirst[1].y;
                 
@@ -36,9 +35,8 @@ namespace DefaultNamespace
                     // heightOfTotalContent += contentItem.GetComponent<RectTransform>().rect.height;
                 }
 
-                heightOfTotalContent = math.abs(minY - maxY);
+                // heightOfTotalContent = math.abs(minY - maxY);
                 heightOfTotalContent = contentItems[0].GetComponent<RectTransform>().rect.height;
-                // this.contentListHolder.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, heightOfTotalContent);
                 return heightOfTotalContent+paddingTop+paddingBottom;
             }
             else

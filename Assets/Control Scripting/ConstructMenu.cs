@@ -35,6 +35,13 @@ public class ConstructMenu : MonoBehaviour
             targetOptionDisplay.constructorMenu = this.gameObject.GetComponent<ConstructMenu>();
             targetOptionDisplay.updateTargetAttributes();
         }
+        
+        Window preCreatedParentWindow = null;
+        // // this.gameObject.transform.parent.parent.TryGetComponent<Window>(out preCreatedParentWindow);
+        // if (preCreatedParentWindow != null)
+        // {
+        //     preCreatedParentWindow.updateHeight();
+        // }
 
         this.bodyTargets = instantiatedBoxes;
     }
