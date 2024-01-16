@@ -8,7 +8,7 @@ public class Builder : MonoBehaviour
 
     public void construct(GameObject target)
     {
-        Debug.Log("TEST + "+target.name);
+        Debug.Log("CONSTRUCT CALLED: "+target.name);
     }
     
     // Start is called before the first frame update

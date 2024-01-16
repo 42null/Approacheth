@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -27,15 +28,55 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
     [SerializeField] public Camera camera;
 
     private Dictionary<GameObject, ConstructedMenu> constructedMenus = new Dictionary<GameObject, ConstructedMenu>(){};
+
+    private Dictionary<GameObject, List<windowSections>> sectionsToBuildWith = new Dictionary<GameObject, List<windowSections>>();
+
+    public enum windowSections
+    {
+        REOURCES,
+        CONSTRUCT,
+    }
+
+
+    private void addSection(GameObject gameObjectRequesting, windowSections windowSection)
+    {
+        if (sectionsToBuildWith.ContainsKey(gameObjectRequesting))
+        {
+            sectionsToBuildWith[gameObjectRequesting].Add(windowSection);
+        }
+        else
+        {
+            sectionsToBuildWith[gameObjectRequesting] = new List<windowSections> { windowSection };
+        }
+    }
+
+    public void addResources(GameObject gameObjectRequesting)
+    {
+        addSection(gameObjectRequesting, windowSections.REOURCES);
+    }
     
-    public void openOrResourceWindow(GameObject gameObjectRequesting)
+    public void addConstructor(GameObject gameObjectRequesting)
+    {
+        addSection(gameObjectRequesting, windowSections.CONSTRUCT);
+    }
+    
+    public void buildFromAlreadyAdded(GameObject gameObjectRequesting)
+    {
+        Debug.Log(gameObjectRequesting.name);
+
+        if (sectionsToBuildWith[gameObjectRequesting] != null)
+        {
+            openOrResourceWindow(gameObjectRequesting, sectionsToBuildWith[gameObjectRequesting]);
+        }
+    }
+    
+    public void openOrResourceWindow(GameObject gameObjectRequesting, List<windowSections> includeSections)
     {
         if(constructedMenus.ContainsKey(gameObjectRequesting))
         {
             ConstructedMenu targetedMenu = constructedMenus[gameObjectRequesting];
             targetedMenu.window.updateHeight();
             targetedMenu.initatedPrefab.SetActive(!targetedMenu.initatedPrefab.activeSelf);
-            
         }
         else
         {
@@ -49,42 +90,43 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
                 Vector2 canvasPosition = WorldToCanvasPosition(canvasToPlaceOn, camera, worldPosition);
                 canvasPosition.x += (canvasToPlaceOn.GetComponent<RectTransform>().sizeDelta.x / 2);
                 canvasPosition.y += (canvasToPlaceOn.GetComponent<RectTransform>().sizeDelta.y / 2);
-            
-                GameObject instantiatedWindowPrefab = Instantiate(windowPrefab, canvasPosition, Quaternion.identity, canvasToPlaceOn.transform);
+
+                GameObject instantiatedWindowPrefab = Instantiate(windowPrefab, canvasPosition, Quaternion.identity,
+                    canvasToPlaceOn.transform);
                 // instantiatedWindowPrefab.transform.SetParent(canvasToPlaceOn.transform, false);
 
-            
+
                 Window window = instantiatedWindowPrefab.GetComponent<Window>();
-                GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition, Quaternion.identity, instantiatedWindowPrefab.transform);
+                GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition,
+                    Quaternion.identity, instantiatedWindowPrefab.transform);
                 // GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition, Quaternion.identity, window.content.transform);
-            
+
                 resourcesContent.transform.SetParent(window.content.transform, false);
-            
+
                 resourcesContent.GetComponent<ResourceDisplayList>().DisplayResources = resourceHolder;
-            
+
                 window.contentItems.Add(resourcesContent);
-                
-                constructedMenus.Add(gameObjectRequesting, new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
+
+                constructedMenus.Add(gameObjectRequesting,
+                    new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
 
 
-
-
-                Debug.Log("ADDING 2nd");
-                
-                GameObject selectorConstruct = Instantiate(selectContentListPrefab, canvasPosition, Quaternion.identity, instantiatedWindowPrefab.transform);
-                selectorConstruct.transform.SetParent(window.content.transform, false);
-                
-                window.contentItems.Add(selectorConstruct);
-                try
+                if (includeSections.Contains(windowSections.CONSTRUCT))
                 {
-                    window.updateHeight();
+                    GameObject selectorConstruct = Instantiate(selectContentListPrefab, canvasPosition,
+                        Quaternion.identity, instantiatedWindowPrefab.transform);
+                    selectorConstruct.transform.SetParent(window.content.transform, false);
+                
+                    window.contentItems.Add(selectorConstruct);
+                    try
+                    {
+                        window.updateHeight();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("Error: " + e.Message);
+                    }
                 }
-                catch (Exception e)
-                {
-                    Debug.Log("Error: "+e.Message);
-                }
-                //
-                // constructedMenus.Add(gameObjectRequesting, new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
             }
         }
     }
@@ -111,6 +153,6 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        openOrResourceWindow(eventData.pointerPress);
+        openOrResourceWindow(eventData.pointerPress, new List<windowSections>() { windowSections.CONSTRUCT });
     }
 }

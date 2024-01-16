@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NaturalResourceGen {
@@ -10,6 +12,7 @@ public class NaturalResourceGen {
         STAR,
         PLANNET,
         ASTROID_TYPE_M,
+        VANGAURD,
     }
 
     public static ResourceHolder generateResources(BodyType bType, float mass)
@@ -50,10 +53,27 @@ public class NaturalResourceGen {
                 { ResourceHolder.Cobalt, 0.06f/100*(mass) },
             };
         }
+        else if(bType == BodyType.VANGAURD)
+        {
+            resources = new SortedList<Resource, float>
+            {
+                { ResourceHolder.Iron,      30f/100*(mass) },
+                { ResourceHolder.Nickel,    10f/100*(mass) },
+                { ResourceHolder.Aluminium, 10f/100*(mass) },
+                { ResourceHolder.Cobalt,    5f/100*(mass) },
+                { ResourceHolder.Carbon,    30f/100*(mass) },
+                { ResourceHolder.Silicon,   10f/100*(mass) },
+                { ResourceHolder.Copper,    5f/100*(mass) },
+                { ResourceHolder.Oxygen,    5f/100*(mass) },
+            };
+        }
         else
         {
             resources = new SortedList<Resource, float>();
         }
+
+        // resources.OrderByDescending(r => r.Key.atomicNumber)
+        // return new ResourceHolder(new SortedList<Resource, float>(resources.OrderByDescending(r => r.Value).ToDictionary(r => r.Key, v => v.Value)));
         return new ResourceHolder(resources);
     }
         
