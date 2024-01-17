@@ -123,11 +123,76 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &226822486 stripped
+--- !u!1 &80352649
 GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80352651}
+  - component: {fileID: 80352650}
+  m_Layer: 0
+  m_Name: Solar Body Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &80352650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80352649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124c5fb32dbe044a79f76f720c2a74f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryBody: {fileID: 1487550711}
+  planets:
+  - {fileID: 1354042432}
+  astroids:
+  - {fileID: 341283438}
+--- !u!4 &80352651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80352649}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &226822486
+GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3218153131236874718, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
   m_PrefabInstance: {fileID: 5909108966496748977}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226822495}
+  - component: {fileID: 226822494}
+  - component: {fileID: 226822491}
+  - component: {fileID: 226822493}
+  - component: {fileID: 226822490}
+  - component: {fileID: 226822492}
+  m_Layer: 0
+  m_Name: Control/Vangaurd Ship
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!114 &226822490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +306,85 @@ MonoBehaviour:
   bodyType: 4
   orbiters: []
   scale: 1
+--- !u!114 &226822493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7660297964515170598, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
+  m_PrefabInstance: {fileID: 5909108966496748977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226822486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7fd78b5c86f4f8f8684e6520fb2ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &226822494
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3198768738250986179, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
+  m_PrefabInstance: {fileID: 5909108966496748977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226822486}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 4b8ff2615c6094a34a6135ebf686f90a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &226822495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3750513502364728277, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
+  m_PrefabInstance: {fileID: 5909108966496748977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226822486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.798, y: -2.592, z: 0}
+  m_LocalScale: {x: 0.08228, y: 0.08228, z: 1.6456}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &341283438
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +541,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1142721921}
           m_TargetAssemblyTypeName: OptionsHandler, Assembly-CSharp
-          m_MethodName: addConstructor
+          m_MethodName: addResources
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 341283438}
@@ -1115,6 +1259,7 @@ MonoBehaviour:
   content: {fileID: 1714994722}
   closeIcon: {fileID: 1142108778}
   shrinkIcon: {fileID: 355034205}
+  referenceIcon: {fileID: 0}
   contentListHolder: {fileID: 1714994722}
   contentItems:
   - {fileID: 1641171570}
@@ -1562,10 +1707,10 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1142721921}
           m_TargetAssemblyTypeName: OptionsHandler, Assembly-CSharp
-          m_MethodName: addConstructor
+          m_MethodName: addOptions
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgument: {fileID: 1354042432}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -1756,7 +1901,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1142721921}
           m_TargetAssemblyTypeName: OptionsHandler, Assembly-CSharp
-          m_MethodName: addConstructor
+          m_MethodName: addOptions
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1487550711}
@@ -2461,7 +2606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3218153131236874718, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
       propertyPath: m_Name
-      value: Control Ship
+      value: Control/Vangaurd Ship
       objectReference: {fileID: 0}
     - target: {fileID: 3750513502364728277, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
       propertyPath: m_LocalScale.x
@@ -2477,11 +2622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750513502364728277, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.39
+      value: -2.798
       objectReference: {fileID: 0}
     - target: {fileID: 3750513502364728277, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.7
+      value: -2.592
       objectReference: {fileID: 0}
     - target: {fileID: 3750513502364728277, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2622,6 +2767,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8965320817636503137, guid: baa0ffbf4506c42bdbe62844cd80d76e, type: 3}
+      propertyPath: bodyTargets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965320817636503137, guid: baa0ffbf4506c42bdbe62844cd80d76e, type: 3}
       propertyPath: bodyTargets.Array.data[0]
       value: 
       objectReference: {fileID: 1487550711}
@@ -2648,3 +2797,4 @@ SceneRoots:
   - {fileID: 1876214919}
   - {fileID: 1582504302}
   - {fileID: 1142721920}
+  - {fileID: 80352651}

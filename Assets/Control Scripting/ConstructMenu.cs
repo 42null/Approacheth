@@ -11,9 +11,11 @@ public class ConstructMenu : MonoBehaviour
     [SerializeField] public List<GameObject> constructionPrefabs;
 
     
-    [FormerlySerializedAs("prefabSelectorBars")] [SerializeField]
-    public GameObject prefabSelectorBar;
-    [SerializeField] public GameObject[] bodyTargets;
+    [SerializeField] public GameObject prefabSelectorBar;
+    [SerializeField] public List<GameObject> gameObjectTargets = new List<GameObject>(){};
+    [SerializeField] public List<GameObject> builtBodyTargets = new List<GameObject>(){};
+    [SerializeField] public SolarBodyTracker solarBodyTracker = new SolarBodyTracker();
+    // new SolarBodyTracker();
 
     
     private TargetOptionDisplay selectedTarget = null;
@@ -21,17 +23,25 @@ public class ConstructMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] instantiatedBoxes = new GameObject[bodyTargets.Length];
+        solarBodyTracker = GameObject.Find("/Solar Body Tracker").GetComponent<SolarBodyTracker>();
+        //Locate targets by self
+        if (gameObjectTargets.Count == 0)
+        {
+            gameObjectTargets = solarBodyTracker.getSolarTargets();
+        }
+        
+        
+        List<GameObject> instantiatedBoxes = new List<GameObject>(){};
 
         float startingY = 70;
-        for (int i = 0; i < bodyTargets.Length; i++)
+        for (int i = 0; i < gameObjectTargets.Count; i++)
         {
             // instantiatedBoxes[i] = Instantiate(prefabSelectorBar, new Vector3(0, -100f, 0), Quaternion.identity, scrollPanel.transform) as GameObject;
             Vector3 relativeSpawnPositionToPanel = new Vector3(0, startingY + ( -72 * i ), 0);
-            instantiatedBoxes[i] = Instantiate(prefabSelectorBar, scrollPanel.transform.TransformPoint(relativeSpawnPositionToPanel), Quaternion.identity, scrollPanel.transform) as GameObject;
+            instantiatedBoxes.Add(Instantiate(prefabSelectorBar, scrollPanel.transform.TransformPoint(relativeSpawnPositionToPanel), Quaternion.identity, scrollPanel.transform) as GameObject);
 
             TargetOptionDisplay targetOptionDisplay = instantiatedBoxes[i].GetComponent<TargetOptionDisplay>();
-            targetOptionDisplay.targetSystemObject = bodyTargets[i];
+            targetOptionDisplay.targetSystemObject = gameObjectTargets[i];
             targetOptionDisplay.constructorMenu = this.gameObject.GetComponent<ConstructMenu>();
             targetOptionDisplay.updateTargetAttributes();
         }
@@ -43,7 +53,7 @@ public class ConstructMenu : MonoBehaviour
         //     preCreatedParentWindow.updateHeight();
         // }
 
-        this.bodyTargets = instantiatedBoxes;
+        this.builtBodyTargets = instantiatedBoxes;
     }
 
     public void select(TargetOptionDisplay targetOptionDisplay)
@@ -60,22 +70,7 @@ public class ConstructMenu : MonoBehaviour
 
     public void constructClick()
     {
-        
-        // this.heldResources = SortedList<Resource, float> resources = new SortedList<Resource, float>
-        // {
-        //     { ResourceHolder.Hydrogen, 91.2f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Helium, 8.7f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Oxygen, 0.078f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Carbon, 0.043f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Nitrogen, 0.0088f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Silicon, 0.0045f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Magnesium, 0.0038f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Neon, 0.0035f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Iron, 0.0030f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        //     { ResourceHolder.Sulfur, 0.0015f/100*Units.solarMassToMegatonne(sizeSolarMasses) },
-        // };
-        
-        
+
         GameObject placeUnderTransform = this.selectedTarget.targetSystemObject.transform.gameObject;
                                                 
         Vector3 globalScale = new Vector3(0.03f, 0.03f, 1f);
@@ -91,9 +86,6 @@ public class ConstructMenu : MonoBehaviour
         
         newlyConstructed.transform.localScale = globalScale;
     }
-
-
-
 
 
     // Update is called once per frame

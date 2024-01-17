@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ConstructedMenu
 {
@@ -35,6 +36,7 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
     {
         REOURCES,
         CONSTRUCT,
+        OPTIONS,
     }
 
 
@@ -55,6 +57,11 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
         addSection(gameObjectRequesting, windowSections.REOURCES);
     }
     
+    public void addOptions(GameObject gameObjectRequesting)
+    {
+        addSection(gameObjectRequesting, windowSections.OPTIONS);
+    }
+    
     public void addConstructor(GameObject gameObjectRequesting)
     {
         addSection(gameObjectRequesting, windowSections.CONSTRUCT);
@@ -62,7 +69,7 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
     
     public void buildFromAlreadyAdded(GameObject gameObjectRequesting)
     {
-        Debug.Log(gameObjectRequesting.name);
+        Debug.Log($"BuildFromAlreadyAdded: \"{gameObjectRequesting.name}\"");
 
         if (sectionsToBuildWith[gameObjectRequesting] != null)
         {
@@ -91,41 +98,35 @@ public class OptionsHandler : MonoBehaviour, IPointerClickHandler
                 canvasPosition.x += (canvasToPlaceOn.GetComponent<RectTransform>().sizeDelta.x / 2);
                 canvasPosition.y += (canvasToPlaceOn.GetComponent<RectTransform>().sizeDelta.y / 2);
 
-                GameObject instantiatedWindowPrefab = Instantiate(windowPrefab, canvasPosition, Quaternion.identity,
-                    canvasToPlaceOn.transform);
-                // instantiatedWindowPrefab.transform.SetParent(canvasToPlaceOn.transform, false);
-
-
+                GameObject instantiatedWindowPrefab = Instantiate(windowPrefab, canvasPosition, Quaternion.identity, canvasToPlaceOn.transform);
                 Window window = instantiatedWindowPrefab.GetComponent<Window>();
-                GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition,
-                    Quaternion.identity, instantiatedWindowPrefab.transform);
-                // GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition, Quaternion.identity, window.content.transform);
 
-                resourcesContent.transform.SetParent(window.content.transform, false);
+                window.referenceIcon.GetComponent<Image>().sprite = gameObjectRequesting.GetComponent<SpriteRenderer>().sprite;
+                
+                
+                if (includeSections.Contains(windowSections.REOURCES))
+                {
+                    GameObject resourcesContent = Instantiate(resourceContentListPrefab, canvasPosition, Quaternion.identity, instantiatedWindowPrefab.transform);
 
-                resourcesContent.GetComponent<ResourceDisplayList>().DisplayResources = resourceHolder;
+                    resourcesContent.transform.SetParent(window.content.transform, false);
 
-                window.contentItems.Add(resourcesContent);
+                    resourcesContent.GetComponent<ResourceDisplayList>().DisplayResources = resourceHolder;
 
-                constructedMenus.Add(gameObjectRequesting,
-                    new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
+                    window.contentItems.Add(resourcesContent);
 
+                    constructedMenus.Add(gameObjectRequesting,
+                        new ConstructedMenu(gameObjectRequesting, instantiatedWindowPrefab, window));
+   
+                }
 
                 if (includeSections.Contains(windowSections.CONSTRUCT))
                 {
                     GameObject selectorConstruct = Instantiate(selectContentListPrefab, canvasPosition,
                         Quaternion.identity, instantiatedWindowPrefab.transform);
                     selectorConstruct.transform.SetParent(window.content.transform, false);
-                
+
                     window.contentItems.Add(selectorConstruct);
-                    try
-                    {
-                        window.updateHeight();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log("Error: " + e.Message);
-                    }
+                    window.updateHeight();
                 }
             }
         }

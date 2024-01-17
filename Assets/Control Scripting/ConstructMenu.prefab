@@ -94,9 +94,7 @@ MonoBehaviour:
   - {fileID: 3055983415667929345, guid: 0f0d253acb92e4d358342f4003adf16b, type: 3}
   - {fileID: 3218153131236874718, guid: 39e85ad58fcde43b8ae8f680d1f05923, type: 3}
   prefabSelectorBar: {fileID: 1500304861025348457, guid: 2aee82cae5cec42dcb349ae248e4d938, type: 3}
-  bodyTargets:
-  - {fileID: 0}
-  - {fileID: 0}
+  bodyTargets: []
 --- !u!1 &2881674803987722306
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using System.Linq;
 using DefaultNamespace;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 public class Window : MonoBehaviour
@@ -12,6 +14,7 @@ public class Window : MonoBehaviour
     [SerializeField] public GameObject content;
     [SerializeField] public GameObject closeIcon;
     [SerializeField] public GameObject shrinkIcon;
+    [SerializeField] public GameObject referenceIcon;
     [SerializeField] public GameObject contentListHolder;
     [SerializeField] public List<GameObject> contentItems = new List<GameObject>() { };
 
@@ -77,7 +80,6 @@ public class Window : MonoBehaviour
     // Make draggable
     public void OnMouseDrag()
     {
-        Debug.Log("MOIUSEMOVE");
         this.gameObject.transform.position = Input.mousePosition;
     }
 }
