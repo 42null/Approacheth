@@ -13,6 +13,7 @@ public class NaturalResourceGen {
         PLANNET,
         ASTROID_TYPE_M,
         VANGAURD,
+        IMPACTOR_PROBE,
     }
 
     public static ResourceHolder generateResources(BodyType bType, float mass)
@@ -57,7 +58,7 @@ public class NaturalResourceGen {
         {
             resources = new SortedList<Resource, float>
             {
-                { ResourceHolder.Iron,      30f/100*(mass) },
+                { ResourceHolder.Iron,      20f/100*(mass) },
                 { ResourceHolder.Nickel,    10f/100*(mass) },
                 { ResourceHolder.Aluminium, 10f/100*(mass) },
                 { ResourceHolder.Cobalt,    5f/100*(mass) },
@@ -65,11 +66,24 @@ public class NaturalResourceGen {
                 { ResourceHolder.Silicon,   10f/100*(mass) },
                 { ResourceHolder.Copper,    5f/100*(mass) },
                 { ResourceHolder.Oxygen,    5f/100*(mass) },
+                { ResourceHolder.Magnesium, 5f/100*(mass) },
+                { ResourceHolder.Fluorine,  5f/100*(mass) },
+            };
+        }
+        else if(bType == BodyType.IMPACTOR_PROBE)
+        {
+            resources = new SortedList<Resource, float>
+            {
+                { ResourceHolder.Iron,      40f/100*(mass) },
+                { ResourceHolder.Oxygen,    20f/100*(mass) },
+                { ResourceHolder.Silicon,   15f/100*(mass) },
+                { ResourceHolder.Magnesium, 2.5f/100*(mass) },
+                { ResourceHolder.Fluorine,  2.5f/100*(mass) },
             };
         }
         else
         {
-            resources = new SortedList<Resource, float>();
+            resources = new SortedList<Resource, float>(){};
         }
 
         // resources.OrderByDescending(r => r.Key.atomicNumber)

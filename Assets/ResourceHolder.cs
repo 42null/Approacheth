@@ -271,11 +271,15 @@ public class ResourceHolder
     public static readonly Resource Oganesson = new Resource(Element.OGANESSON, 118, "Og", "Oganesson", 325f);
     
     
-    public SortedList<Resource, float> storedResources;
+    public SortedList<Resource, float> storedResources = new SortedList<Resource, float>(){};
     
     public ResourceHolder(SortedList<Resource, float> storedResources)
     {
-        this.storedResources = storedResources;
+        if (storedResources.Count != 0)
+        {
+            this.storedResources = storedResources;
+        }
+        
     }
 
     public float addResrouce(Resource resource, float amountMegatonneage)
@@ -306,5 +310,20 @@ public class ResourceHolder
     public SortedList<Resource, float> getResouces()
     {
         return this.storedResources;
+    }
+
+    //Checks if one resourceHolder contains all the resources inside another
+    public bool containsAll(ResourceHolder contains)
+    {
+        foreach (var resouce in contains.getResouces())
+        {
+            Debug.Log("K:"+this.getResouce(resouce.Key));
+            Debug.Log("V:"+resouce.Value);
+            // if (this.getResouce(resouce.Key) < resouce.Value)
+            // {
+            //     return false;
+            // }
+        }
+        return true;
     }
 }

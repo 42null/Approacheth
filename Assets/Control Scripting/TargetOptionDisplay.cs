@@ -12,26 +12,41 @@ public class TargetOptionDisplay : MonoBehaviour
     [SerializeField] public GameObject targetSystemObject;
     [SerializeField] public Image icon;
     [SerializeField] public GameObject title;
-    [SerializeField] public ConstructMenu constructorMenu;
+    [SerializeField] public SelectOptionMenu constructorMenu;
 
     [SerializeField] public Color defaultColor = new Color(0.8f, 0.8f, 0.8f, 1f);
     [SerializeField] public Color onHighlightColor = new Color(1f, 1f, 1f, 1f);
+    [SerializeField] public Color disabledColor = new Color(0.2f, 0.2f, 0.2f, 1f);
     
     public TargetOptionDisplay()
     {
     }
-
-    public void setBackgroundSelected()
+    
+    
+    public void setBackgroundDisabled(bool disabled)
     {
-        
+        if (disabled)
+        {
+            GetComponent<Image>().color = disabledColor;
+        }
+        else
+        {
+            GetComponent<Image>().color = defaultColor;
+        }
     }
     
     public void click()
     {
         constructorMenu.select(this);
         GetComponent<Image>().color = onHighlightColor;//new Color(onHighlightColor.r, onHighlightColor.g, onHighlightColor.b, onHighlightColor.a);
-
+//@@@
+        // if(this.constructorMenu.)
+        // {
+        //     
+        // }
     }
+    
+    // public void refresh
 
     public void setBackgroundSelected(bool selected)
     {

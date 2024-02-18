@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3055983415667929345
+--- !u!1 &7120194174647717479
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4528602593876294460}
-  - component: {fileID: 3037201140612769060}
-  - component: {fileID: 4860953459530555101}
-  - component: {fileID: 7935865510622443776}
-  m_Layer: 10
-  m_Name: Orbital Beaming Panel
+  - component: {fileID: 1912133491313669343}
+  - component: {fileID: 7657562067577149176}
+  - component: {fileID: 6031162860799507983}
+  - component: {fileID: 2304938702049237592}
+  m_Layer: 0
+  m_Name: Impactor Probe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4528602593876294460
+--- !u!4 &1912133491313669343
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055983415667929345}
+  m_GameObject: {fileID: 7120194174647717479}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2183986, y: 0.27669212, z: 0.09761854, w: 0.93070626}
-  m_LocalPosition: {x: 1.9147, y: -0.1382, z: 2.2563}
-  m_LocalScale: {x: 0.05080536, y: 0.05080536, z: 0.05080536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 20.641, y: 36.579, z: 18.864}
---- !u!212 &3037201140612769060
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7657562067577149176
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055983415667929345}
+  m_GameObject: {fileID: 7120194174647717479}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,24 +75,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 408fb91706bc24d218d32b0d8dd4e568, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Color: {r: 0, g: 0.7728834, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 9.6, y: 9.6}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4860953459530555101
+--- !u!114 &6031162860799507983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055983415667929345}
+  m_GameObject: {fileID: 7120194174647717479}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a3f155dd10004a17b93c9d1c27644cc, type: 3}
@@ -101,13 +101,13 @@ MonoBehaviour:
   bodyType: 5
   orbiters: []
   scale: 1
---- !u!114 &7935865510622443776
+--- !u!114 &2304938702049237592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055983415667929345}
+  m_GameObject: {fileID: 7120194174647717479}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd6ea15097ba0413dbaffab33b67b7e3, type: 3}

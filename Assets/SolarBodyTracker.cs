@@ -9,6 +9,8 @@ public class SolarBodyTracker : MonoBehaviour
     //Will make a different system but right now, larger bodies (planets) will not require sending a probe first and it will be seperated in a better way. 
     [SerializeField] public List<GameObject> planets = new List<GameObject>(){}; 
     [SerializeField] public List<GameObject> astroids = new List<GameObject>(){};
+    
+    [SerializeField] public List<GameObject> buildables = new List<GameObject>(){};
 
     public List<GameObject> getSolarTargets()
     {
@@ -17,6 +19,11 @@ public class SolarBodyTracker : MonoBehaviour
         allSolarObjects.AddRange(astroids);
         return allSolarObjects;
     }
+    public List<GameObject> getConstructionTargets()
+    {
+        return buildables;
+    }
+    
     
     // Start is called before the first frame update
     void Start()

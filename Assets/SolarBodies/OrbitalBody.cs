@@ -33,7 +33,7 @@ public class OrbitalBody : MonoBehaviour
     public NaturalResourceGen.BodyType bodyType = NaturalResourceGen.BodyType.UNSET_DEFAULT;
     
     // [SerializeField] public List<KeyValuePair<GameObject, float>> orbiters = new List<KeyValuePair<GameObject, float>>();
-    [SerializeField] public List<OrbiterData> orbiters = new List<OrbiterData>();
+    [SerializeField] public List<OrbiterData> orbiters = new List<OrbiterData>(){};
 
     [SerializeField] [Range(0f, 10f)] public float scale = 1f;
     
@@ -43,6 +43,12 @@ public class OrbitalBody : MonoBehaviour
     
     private Transform transform;
 
+    
+    public OrbitalBody()
+    {
+        this.resourceHolder = NaturalResourceGen.generateResources(this.bodyType, scale);
+    }
+    
     public float getAngle()
     {
         return orbitingAtAngle;
@@ -52,16 +58,10 @@ public class OrbitalBody : MonoBehaviour
         return this.orbitingAtAngle += angle;
     }
 
-    // public OrbitalBody()
-    public OrbitalBody()
-    {
-    }
-
     // public SortedList<Resource,float> getResourses()
     public ResourceHolder getResourses()
     {
         return this.resourceHolder;
-        // return resourceHolder.getResouces();
     }
 
 
